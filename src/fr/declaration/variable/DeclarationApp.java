@@ -4,8 +4,7 @@ public class DeclarationApp {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		byte monByte = 1;
+			byte monByte = 1;
 		short monShort = 2; 
 		int monInt = 3;
 		long monLong = 4l;
@@ -22,6 +21,8 @@ public class DeclarationApp {
 		
 		randomString = "Voici le résultat d'un calcul :\n1+5=6";
 		System.out.println(randomString);
+		int a = 053;
+		System.out.println(a);
 		
 	}
 
