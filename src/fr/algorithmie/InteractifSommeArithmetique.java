@@ -4,45 +4,42 @@ import java.util.Scanner;
 
 public class InteractifSommeArithmetique {
 
-	static int askMe(Scanner scanner)
-	{	
-		System.out.println("Donne moi un chiffre");
-
-
-		if(!scanner.hasNextInt())
-		{
-			System.out.println("Ceci n'est pas un entier... Try again !\n");
-			
-			scanner.nextLine();
-			askMe(scanner);
+	int estInt(Scanner scan) {
+		
+		while (!scan.hasNextInt()) {
+				System.out.println("\n\""+scan.next()+"\" n'est pas un entier ! Réessayez :\n");
 		}
 		
-		int nb = scanner.nextInt();
-		
-		scanner.close();
-		return nb;
+		int estInt = scan.nextInt();
+		return estInt;	
 		
 	}
 	
-	static void fct(int nb)
-	{
+	void go() {
+		
+		System.out.println("======================\n\nDonnez moi un nombre\n\n======================\n");
+		
+		Scanner scan = new Scanner(System.in);
+		
+		int nombre = estInt(scan);
 		int somme = 0;
-		for(int i = nb; i>0 ;i--)
-			{
+		
+		for(int i = nombre; i>0; i--) {
 				somme += i;
 			}
 
-		System.out.println("La somme de tous les entiers entre 1 et "+nb+" est : "+somme);
+		System.out.println("\nLa somme de tous les entiers entre 1 et "+nombre+" est : "+somme);
 		
-		
+		scan.close();
 		
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Scanner scanner = new Scanner(System.in);
-		fct(askMe(scanner));
+		InteractifSommeArithmetique go = new InteractifSommeArithmetique();
+		go.go();
+				
 	}
 
 }

@@ -4,30 +4,26 @@ import java.util.Scanner;
 
 public class InteractifChiffresSuivants {
 
-	static int askMe(Scanner scanner)
-	{	
+	
+	int estInt(Scanner scan) {
 		
-		System.out.println("Donne moi un chiffre...\n\n");
-		
-		if(!scanner.hasNextInt())
-		{
-			System.out.println("Ceci n'est pas un entier... Try again !\n");
-			
-			scanner.nextLine();
-			askMe(scanner);
+		while (!scan.hasNextInt()) {
+				System.out.println("\n\""+scan.next()+"\" n'est pas un entier ! Réessayez :\n");
 		}
 		
-		int nb = scanner.nextInt();
-		
-		return nb;
+		int estInt = scan.nextInt();
+		return estInt;	
 		
 	}
 	
-	static void cs(int nb)
-	{
-		System.out.println("\nLa suite correspondante à "+nb+" est :\n");
+	void go(Scanner scan) {
 		
-		for(int i = nb; i<=nb+10;i++)
+		System.out.println("======================\n\nDonnez moi un chiffre\n\n======================\n");
+		int chiffre = estInt(scan);
+		
+		System.out.println("\nLa suite correspondante à "+chiffre+" est :\n");
+	
+		for(int i = chiffre; i<=chiffre+10;i++)
 		{
 			System.out.println(i);
 		}
@@ -36,10 +32,10 @@ public class InteractifChiffresSuivants {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Scanner scanner = new Scanner(System.in);
-		cs(askMe(scanner));
-		
-		scanner.close();
+		Scanner scan = new Scanner(System.in);
+		InteractifChiffresSuivants go = new InteractifChiffresSuivants();
+		go.go(scan);
+		scan.close();
 	}
 
 }

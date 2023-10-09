@@ -6,113 +6,140 @@ import java.util.Scanner;
 public class Interfactif21Batons {
 	
 	
-	static int human(Scanner scanner, int score)
-	{
+	int estInt(Scanner scan) {
 		
-		if(score>3)
-		{
-			System.out.println("Prenez un, deux ou trois batons !");
-		}
-		else if (score==2)
-		{
-			System.out.println("Prenez un ou deux batons !");
-		}
-		else
-		{
-			System.out.println("Plus trop le choix... prend le dernier >:C !");
-		}
-	
-		
-		int play = scanner.nextInt();
-		
-		if(play>3 || play<=0)
-		{
-			System.out.println("Merci de respecter les régles du jeux >:C !");
-			human(scanner, score);
+		while (!scan.hasNextInt()) {
+				System.out.println("\n\""+scan.next()+"\" n'est pas un entier ! Réessayez :\n");
 		}
 		
+		int estInt = scan.nextInt();
+		return estInt;	
 		
-		if(play>score)
-		{
-			System.out.println("Pas assez de batons dans la partie ! Prennez en moins >:C !");
-			human(scanner, score);
-		}
-		
-		System.out.println("Vous avez pris "+play+" batons !");
-		
-		return play;
 	}
 	
 	
-	static int computer(Random random, int score)
-	{
+	void afficheChoix(int choix, int tour) {
 		
-		int play = 0;
+		String joueur;
 		
-		if(score>3)
-		{
-			play = random.nextInt(1,3);	
-		}
-		else if(score==2)
-		{
-			play = random.nextInt(1,2);
-		}
-		else
-		{
-			play = 1;
+		if (tour == 1) {
+			joueur = "Vous avez ";
+		} else {
+			joueur = "L'ordinateur a ";
 		}
 		
-		System.out.println("L'ordinateur a prit "+play+" batons !");
+		if (choix == 1) {
+			System.out.println("\n"+joueur+"retiré un baton\n");
+		} else {
+			System.out.println("\n"+joueur+"retiré "+choix+" batons\n");
+		}
 		
-		return play;
 	}
 	
 	
-	static void jeux(Scanner scanner, Random random)
-	{
-		
-		int score = 21;
-		
-		if(random.nextInt(1,2)==1)
-		{
-			System.out.println("à vous de commencer !");
-			score -= human(scanner, score);		
-			System.out.println("Il reste encore "+score+" batons !");
-		}
-		else
-		{
-			System.out.println("L'odinateur commence >:C !");
-		}
-		
-		while(true)
-		{
-			
-			
-			score-=computer(random, score);
-			
-			if(score==0)
-			{
-				System.out.println("vous avez gagné !");
+	int humain(Scanner scan, int batons) {
+	
+		switch (batons) {
+			case 2 :
+				System.out.println("Prenez un ou deux batons :\n");
 				break;
-			}
-			else 
-			{
-				System.out.println("Il reste "+score+" batons :");
-			}
-			
-			score-=human(scanner, score);
-			
-			if(score==0)
-			{
-				System.out.println("L'odinateur a gagné >:C !\n"
-						+ "All your base are belong to us !");
+			case 1 :
+				System.out.println("Prenez le dernier baton...\n");
 				break;
+			default :
+				System.out.println("Prenez un, deux ou trois batons :\n");
+		}
+			
+		int choixH = estInt(scan);
+		
+		while (choixH <=0 || choixH > 3 || choixH > batons) {
+			System.out.println("\nVeuillez ne pas tricher ! Réessayez :\n");
+			choixH = estInt(scan);
+		}
+	
+		afficheChoix(choixH, 1);
+		return choixH;
+		
+	}
+
+	
+	int ordinateur(Random random, int batons) {
+		
+		int choixO = 0;
+		int opti = ( batons % 4 );
+		
+		if (batons > 4) {
+			switch (opti) {
+				case 3 :
+					choixO = 2;
+					break;
+				case 2, 1 :
+					choixO = 1;
+					break;
+				case 0 :
+					choixO = 3;
+					break;
+			} 	
+		} else {
+			switch (batons) {
+				case 4 :
+					choixO = 3;
+					break;
+				case 3 : 
+					choixO = 2;
+					break;
+				case 2, 1:
+					choixO = 1;
+					break;
 			}
-			else
-			{
-				System.out.println("Il reste encore "+score+" batons :");
+		}
+	
+		afficheChoix(choixO, 0);
+		return choixO;
+		
+	}
+	
+	
+	void jeux(Scanner scan) {
+		
+		System.out.println("======================\n\n"
+				+ "Bienvenue au jeux des 21 batons"
+				+ "\n\n======================\n");
+		
+		int batons = 21;
+		
+		Random random = new Random ();
+		
+		if (random.nextInt(1, 3) == 1) {
+			System.out.println("À vous de commencer !"
+					+ "\n\n======================\n");
+			batons -= humain(scan, batons);		
+			System.out.println("Il reste "+batons+" batons dans la partie !"
+					+ "\n\n======================");
+		} else {
+			System.out.println("L'odinateur commence !"
+					+ "\n\n======================");
+		}
+	
+		
+		while(true) {
+			batons-=ordinateur(random, batons);
+			
+			if (batons == 0) {
+				System.out.println("Vous avez gagné !");
+				break;
+			} else {
+				System.out.println("Il reste "+batons+" batons dans la partie !\n\n======================\n");
 			}
 			
+			batons -= humain(scan, batons);
+			
+			if (batons == 0) {
+				System.out.println("L'odinateur a gagné... All your base are belong to us !");
+				break;
+			} else {
+				System.out.println("Il reste encore "+batons+" batons dans la partie !\n\n======================\n");
+			}
 		}
 			
 	}
@@ -121,13 +148,18 @@ public class Interfactif21Batons {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Random random = new Random();
-		Scanner scanner = new Scanner(System.in);
+	
+		Scanner scan = new Scanner(System.in);
 		
-		jeux(scanner, random);
+		Interfactif21Batons go = new Interfactif21Batons();
+		
+		go.jeux(scan);
+		scan.close();
+		
 				
 		
-
+	
 	}
+	
 
 }

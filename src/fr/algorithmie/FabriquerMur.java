@@ -28,14 +28,11 @@ public class FabriquerMur {
 		boolean resultat = false;
 		
 		
-		for(int i = 1; i <= nbBig+1; i++)
-		{
-			if(nbSmall+(i*5)>=longueur)
-			{
+		for(int i = 1; i <= nbBig+1; i++) {
+			if(nbSmall+(i*5)>=longueur) {
 				resultat = true;
 				break;
 			}
-			
 		}
 		
 		return resultat;

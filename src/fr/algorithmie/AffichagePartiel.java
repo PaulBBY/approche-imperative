@@ -8,10 +8,8 @@ public class AffichagePartiel {
 		
 		System.out.println("======================\n\nTest chiffres >3 \n\n======================\n");
 		
-		for (int i : array)
-		{
-			if (i > 3)
-			{
+		for (int i : array) {
+			if (i > 3) {
 				System.out.println(i);
 			}
 			
@@ -19,38 +17,29 @@ public class AffichagePartiel {
 		
 		System.out.println("\n======================\n\nTest chiffres pairs \n\n======================\n");
 		
-		for (int i : array)
-		{
-			if (i % 2 == 0)
-			{
+		for (int i : array) {
+			if (i % 2 == 0) {
 				System.out.println(i);
-			}
-			
+			}	
 		}
 		
 		System.out.println("\n======================\n\nTest index pairs \n\n======================\n");
 		
-		for (int i : array)
-		{
-			if (i % 2 == 0)
-			{
+		for (int i : array) {
+			if (i % 2 == 0) {
 				System.out.println(i);
-			}
-			
+			}	
 		}
 		
 		System.out.println("\n======================\n\nTest chiffres impairs \n\n======================\n");
 
 
-		for (int i : array)
-		{
-			if (i % 2 != 0)
-			{
+		for (int i : array) {
+			if (i % 2 != 0) {
 				System.out.println(i);
 			}
-			
 		}
-		
 	}
+	
 
 }

@@ -4,50 +4,48 @@ import java.util.Scanner;
 
 public class InteractifPlusGrand {
 	
-	static int[] askMe(Scanner scanner)
-	{	
+	
+	int estInt(Scanner scan) {
 		
-		int[] mesNb = new int[10];
-		
-		System.out.println("Donne moi 10 chiffres...");
-		
-		if(!scanner.hasNextInt())
-		{
-			System.out.println("Ceci n'est pas un entier... Try again !\n");
-			
-			scanner.nextLine();
-			askMe(scanner);
+		while (!scan.hasNextInt()) {
+				System.out.println("\n\""+scan.next()+"\" n'est pas un entier ! Réessayez :\n");
 		}
 		
-		
-		int restant=10;
-		
-		for(int i=0;i<10;i++)
-		{
-			int nb = scanner.nextInt();
-			restant--;
-			mesNb[i]=nb;
-			
-			System.out.println("Les chiffre renseigné est : "+nb);
-			
-			if(restant>0)
-			{
-				System.out.println("Il reste "+restant+ " chiffres à renseigner");
-			}
-		}
-
-		return mesNb;
+		int estInt = scan.nextInt();
+		return estInt;	
 		
 	}
 	
-	static void plusGrand(int[] mesNb)
-	{
+	
+	void go(Scanner scan) {	
+		
+		System.out.println("======================\n\nRenseignez 10 numéros\n\n======================\n");
+		
+		int[] mesNb = new int[10];
+		int restant=10;
+		
+		for(int i=0;i<10;i++) {
+			int nb = estInt(scan);
+			restant--;
+			mesNb[i]=nb;
+			
+			System.out.println("\nLe chiffre renseigné est : "+nb+"\n\n======================\n");
+			
+			if (restant>0) {
+				System.out.println("Il reste "+restant+ " chiffres à renseigner\n");
+			}
+		}
+
+		plusGrand(mesNb);
+		
+	}
+	
+	void plusGrand(int[] mesNb) {
+		
 		int max = 0;
 		
-		for(int i : mesNb)
-		{
-			if(i>max)
-			{
+		for(int i : mesNb) {
+			if(i>max) {
 				max =i;
 			}
 		}
@@ -57,9 +55,10 @@ public class InteractifPlusGrand {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner scanner = new Scanner(System.in);
-		plusGrand(askMe(scanner));
-
+		Scanner scan = new Scanner(System.in);
+		InteractifPlusGrand go = new InteractifPlusGrand();
+		
+		go.go(scan);
 	}
 
 }

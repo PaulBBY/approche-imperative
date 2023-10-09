@@ -6,56 +6,57 @@ import java.util.Scanner;
 public class InteractifPlusMoins {
 	
 	
+	int estInt(Scanner scan) {
+		
+		while (!scan.hasNextInt()) {
+				System.out.println("\n\""+scan.next()+"\" n'est pas un entier ! Réessayez :\n");
+		}
+		
+		int estInt = scan.nextInt();
+		return estInt;	
+		
+	}
 	
-	static void guess(int r, Scanner scanner)
-	{
+
+	void go() {
+		 
+		Scanner scan = new Scanner(System.in);
+		Random random = new Random();
+		
+		int r = random.nextInt(1 , 100);
+		
 		int tentatives = 1;
 		
-		System.out.println("Devine un chiffre entre 1 et 100...");
+		System.out.println("======================\n\nDevinez un chiffre entre 1 et 100...\n\n======================\n");
 		
-		while(true)
-		{
-			
-			
-			if(!scanner.hasNextInt())
-			{
-				System.out.println("Ceci n'est pas un entier... Try again !\n");
-				scanner.nextLine();
-			}
-			
-			else
-			{
-				int tentative = scanner.nextInt();
-				
-				if(tentative == r) {
-					System.out.println("Bonne réponse. Mon chiffre était bien : "+r+"\nTu as trouvé en "+tentatives+" tentatives");
-					break;
+		while(true) {
+			String grandeur;
+			int laTentative = estInt(scan);
+			if(laTentative == r) {
+				System.out.println("\nBonne réponse. Mon chiffre était bien : "+r+"\n\nTu as trouvé en "+tentatives+" tentatives");
+				break;
+			} else {
+				tentatives++;
+				if (laTentative>100 || laTentative<=0) {
+					System.out.println("\n"+laTentative+" n'est pas un chiffre netre 1 et 100. Réessayez\n\n======================\n");
 				}
-				
-				else
-				{
-					tentatives++;
-					
-					if (tentative>r)
-					{
-						System.out.println("Dommage. Mon chiffre est plus petit...");
-					}
-					else
-					{
-						System.out.println("Dommage. Mon chiffre est plus grand...");
-					}
-					
+				if (laTentative<r) {
+					grandeur = "grand";
+				} else {
+					grandeur = "petit";
 				}
+				System.out.println("\nDommage. Mon chiffre est plus "+grandeur+". Réessayez\n\n======================\n");
 			}
-			
 		}
-			
+		
+		scan.close();
 	}
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner scanner = new Scanner(System.in);
-		guess(new Random().nextInt(1,100), scanner);
+		InteractifPlusMoins go = new InteractifPlusMoins();
+		go.go();
 		
 	}
 
